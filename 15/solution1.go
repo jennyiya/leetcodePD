@@ -9,7 +9,8 @@ func threeSum(nums []int) [][]int {
 	sort.Ints(nums)
 	var i, j, k int
 	var l []int
-	var temp [][]int
+	var temp,temp2 [][]int
+	
 	for i = len(nums) - 1; i >= 2; i-- {
 		for j = i - 1; j >= 1; j-- {
 			for k = j - 1; k >= 0; k-- {
@@ -24,14 +25,20 @@ func threeSum(nums []int) [][]int {
 							for c := 0; c < len(temp[a]); c++ {
 								if temp[a][c] != temp[b][c] {
 									//fmt.Printf("no dup %v \n", b)
-									break
+									//break									
+									//fmt.Printf("nowthe temp2 is %v\n", temp2)
 								} else {
 									i = i + 1
 								}
-								if i == len(temp[a]) {
-									temp[a] = nil
-									fmt.Printf("%v is dup", temp[b])
-									break
+								if i == len(temp[a]) {									
+									//fmt.Printf("%v is dup", temp[b])
+									for i:=0;i<len(temp);i++{
+										if i !=b{
+											temp2 = append(temp2,temp[i])
+										}
+									}
+									//remove(temp[b])
+									fmt.Print("nowthe temp is")
 								}
 							}
 
@@ -42,19 +49,20 @@ func threeSum(nums []int) [][]int {
 		}
 		fmt.Printf("j is %v ", j)
 	}
-	fmt.Printf("i is %v \n", i)
-	fmt.Printf("the temp is %v", temp)
-	return temp
+	//fmt.Printf("i is %v \n", i)
+	//fmt.Printf("the temp is %v", temp)
+	fmt.Printf("the temp2 is %v", temp2)
+	return temp2
 }
 
 //fmt.Printf("the temp is %v",temp)
 
-func main() {
+func main(){
 
 	var nums []int
 	nums = []int{-1, 0, 1, 2, -1, -4}
 	//threeSum(nums)
-	res := [][]int{}
-	res = threeSum(nums)
+	//res := [][]int{}
+	res := threeSum(nums)
 	fmt.Printf("the res %v", res)
 }
