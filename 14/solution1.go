@@ -5,38 +5,42 @@ import (
 	"fmt"
 )
 func longestCommonPrefix(strs []string) string {
-	var a int
-	var pre string
-	if len(strs) == 0 || len(strs) == 1 {
-		pre:= ""
-		return pre
-	}else {
-		minlen := len(strs[0])
-		pre = strs[0]
-		for i := 1; i < len(strs); i++ {
-			if len(strs[i]) <= minlen {
-				minlen = len(strs[i])
-				a = i
-				fmt.Printf("the a is%v",a)
+		if len(strs) == 0 {
+			return ""
+		} else if len(strs)==1{
+			return strs[0]
+		}else{
+			minlen := len(strs[0])
+			for i := 1; i < len(strs); i++ {
+				if len(strs[i]) <= minlen {
+					minlen = len(strs[i])
+				}
 			}
-			//return a
-		}
-	var j int
-	for j = 0; j < minlen; j++ {
-		for i := 1; i < len(strs); i++ {
-			if strs[i][j] != strs[a][j]  {			
-				pre = strs[0][0:j-1] 	
-				fmt.Printf("the pre is%v",pre)
-			}else{
-				pre = strs[0][:j]
-				fmt.Printf("the pre2 is%v",pre)
+			//var k int
+			res := ""
+			for j := 0; j < minlen; j++ {
+				flag := true
+				val := strs[0][j]
+				for _, v := range strs[1:] {
+					if val != v[j] {
+						flag = false
+						break
+					}
+				}
+				if flag == false && j != 0 {
+					res = strs[0][:j]
+					break
+				}else if flag == false && j == 0 {
+					res = ""
+					break
+				}else{
+					res = strs[0][:j+1]
+				}
+	
 			}
+			return res
 		}
-		//return pre
 	}
-}
-	return pre
-}
 func main() {
 	a := []string{"d","d"}
 	c := longestCommonPrefix(a)
