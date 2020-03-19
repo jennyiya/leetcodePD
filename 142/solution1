@@ -1,0 +1,31 @@
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func detectCycle(head *ListNode) *ListNode {
+    if head==nil || head.Next == nil{
+        return nil
+    }
+    fast := head
+    slow := head
+    for fast.Next != nil&&fast.Next.Next!= nil{
+    //快指针走的比慢指针快一步，如果有环，他们俩一定会相遇
+            fast = fast.Next.Next
+            slow = slow.Next
+            if fast == slow{
+                //一旦相遇，就有了环，慢指针和head一起走一步，相遇的时候就是环的起点
+                //此时换成快指针和head一起走，效果也是一样的
+                for slow != head{
+                slow = slow.Next
+                head = head.Next
+            }
+            return head
+            }
+        
+        
+    }
+    return nil
+}
