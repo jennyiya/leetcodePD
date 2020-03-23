@@ -1,0 +1,22 @@
+func swapPairs(head *ListNode) *ListNode {
+  
+   newNode:=&ListNode{
+       Val : 0,
+       Next: head}
+   h:=newNode
+   i:=h
+   j:=h.Next
+   h.Next = head
+	if head==nil||head.Next ==nil {
+		return head
+	}
+	for i.Next!= nil && i.Next.Next !=nil{
+	
+		i.Next = j.Next
+		j.Next = j.Next.Next
+		i.Next.Next = j
+        i = j
+        j = j.Next
+	}
+        return h.Next
+}
