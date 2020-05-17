@@ -1,0 +1,21 @@
+func reverseList(head *ListNode) *ListNode {
+    //没有数据或者只有一个数据的时候，直接返回head即可
+ if (head == nil)|| (head.Next==nil){
+     return head
+ }
+   // var newhead *ListNode
+    newhead := reverseList(head.Next)
+    //第二个数字指向第一个数字
+    head.Next.Next = head
+    //第一个数字指向空
+    head.Next=nil
+//  for head!=nil{
+//      node:=head.Next
+//      head.Next = newhead
+//      newhead=head
+//      head = node
+//  }
+ return newhead
+}
+//递归
+//第二个元素指向第一个元素之后，后面剩下的链表再实现反转即可
